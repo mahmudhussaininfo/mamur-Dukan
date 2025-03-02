@@ -6,7 +6,6 @@ import Title from "./Title";
 const ReletedProducts = ({ category, id }) => {
   const { products } = useContext(shopContext);
   const [releted, setReleted] = useState([]);
-  console.log(releted);
 
   useEffect(() => {
     if (products.length > 0) {

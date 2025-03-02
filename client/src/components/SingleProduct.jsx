@@ -7,7 +7,7 @@ import { GrSecure } from "react-icons/gr";
 import ReletedProducts from "./ReletedProducts";
 
 const SingleProduct = () => {
-  const { products, currency } = useContext(shopContext);
+  const { products, currency, addCart } = useContext(shopContext);
   const { id } = useParams();
   const [productData, setProductData] = useState(false);
   const [img, setImg] = useState("");
@@ -35,7 +35,7 @@ const SingleProduct = () => {
         <div className="flex gap-8 flex-col sm:flex-row max-sm:px-5">
           {/*====================== products Image ===============================*/}
           <div className="flex flex-1 gap-5 flex-col-reverse sm:flex-row">
-            <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal w-full sm:w-[23%]">
+            <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-hidden justify-between sm:justify-normal w-full sm:w-[23%]">
               {productData.image.map((item, index) => (
                 <img
                   className="w-[24%] sm:w-full mb-3 cursor-pointer shrink-0"
@@ -81,7 +81,10 @@ const SingleProduct = () => {
             <p className="text-lg text-gray-600 py-5">
               Description: {productData.description}
             </p>
-            <button className="bg-green-600 font-semibold text-white px-5 py-2 rounded-md">
+            <button
+              onClick={() => addCart({ id: productData._id, size })}
+              className="bg-green-600 font-semibold text-white px-5 py-2 rounded-md"
+            >
               Add to Cart
             </button>
             {/* ============ Product Extra Text =================== */}

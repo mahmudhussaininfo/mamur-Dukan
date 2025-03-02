@@ -9,7 +9,7 @@ import { shopContext } from "../../context/Context.jsx";
 
 const Header = () => {
   const [visible, setVisible] = useState(false);
-  const { search, setSearch, searchShow, setSearchShow } =
+  const { search, setSearch, searchShow, setSearchShow, cartCount } =
     useContext(shopContext);
 
   return (
@@ -61,7 +61,7 @@ const Header = () => {
           <div className="relative">
             <CiShoppingCart className="text-3xl cursor-pointer" />
             <p className="absolute top-3 right-0 text-white font-bold bg-green-500 rounded-full text-center aspect-square w-4 leading-4 text-sm">
-              1
+              {cartCount()}
             </p>
           </div>
           <div className="sm:hidden ">

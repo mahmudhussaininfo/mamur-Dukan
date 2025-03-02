@@ -5,9 +5,9 @@
   font-family: "Montserrat", serif;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 a.active hr {
   display: block;
