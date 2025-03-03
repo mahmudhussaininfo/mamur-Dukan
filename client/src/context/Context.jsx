@@ -7,7 +7,6 @@ export const shopContext = createContext();
 const ContextProvider = ({ children }) => {
   // Initialize your state here
   const currency = "৳";
-
   const [search, setSearch] = useState("");
   const [searchShow, setSearchShow] = useState(false);
   const [cart, setCart] = useState([]);
@@ -20,7 +19,7 @@ const ContextProvider = ({ children }) => {
         title: "Please select a size",
       });
     }
-    let cartData = structuredClone(cart);
+    let cartData = { ...cart };
 
     if (cartData[id]) {
       if (cartData[id][size]) {
@@ -35,7 +34,7 @@ const ContextProvider = ({ children }) => {
     setCart(cartData);
   };
 
-  // cart icon count
+  //cart icon count
   const cartCount = () => {
     let count = 0;
     for (const items in cart) {
@@ -51,6 +50,16 @@ const ContextProvider = ({ children }) => {
     }
     return count;
   };
+
+  // // Calculate the total number of items in the cart
+  // const cartCount = () => {
+  //   return Object.values(cart).reduce((total, sizes) => {
+  //     return (
+  //       total +
+  //       Object.values(sizes).reduce((sum, quantity) => sum + quantity, 0)
+  //     );
+  //   }, 0);
+  // };
 
   const values = {
     currency,

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { photo } from "../../utils/utils.js";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { CiShoppingCart } from "react-icons/ci";
@@ -58,12 +58,12 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="relative">
+          <Link to="/cart" className="relative">
             <CiShoppingCart className="text-3xl cursor-pointer" />
             <p className="absolute top-3 right-0 text-white font-bold bg-green-500 rounded-full text-center aspect-square w-4 leading-4 text-sm">
               {cartCount()}
             </p>
-          </div>
+          </Link>
           <div className="sm:hidden ">
             <HiMenuAlt3
               onClick={() => setVisible(true)}
