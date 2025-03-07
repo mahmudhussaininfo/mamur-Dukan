@@ -7,6 +7,7 @@ export const shopContext = createContext();
 const ContextProvider = ({ children }) => {
   // Initialize your state here
   const currency = "৳";
+  const deleveryFee = 60;
   const [search, setSearch] = useState("");
   const [searchShow, setSearchShow] = useState(false);
   const [cart, setCart] = useState([]);
@@ -61,6 +62,26 @@ const ContextProvider = ({ children }) => {
   //   }, 0);
   // };
 
+  // update cart quantity
+  const updateCartQuantity = (id, size, quantity) => {
+    let cartData = { ...cart };
+    cartData[id][size] = quantity;
+    setCart(cartData);
+  };
+
+  // get total amount of cart
+  const totalAmount = () => {
+    let total = 0;
+    for (const items in cart) {
+      const product = products.find((data) => data._id === items);
+      for (const item in cart[items]) {
+        if (cart[items][item] > 0) {
+          total += product.price * cart[items][item];
+        }
+      }
+    }
+    return total;
+  };
   const values = {
     currency,
     products,
@@ -71,6 +92,9 @@ const ContextProvider = ({ children }) => {
     cart,
     addCart,
     cartCount,
+    updateCartQuantity,
+    totalAmount,
+    deleveryFee,
   };
   return <shopContext.Provider value={values}>{children}</shopContext.Provider>;
 };
