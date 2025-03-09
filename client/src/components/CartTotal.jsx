@@ -6,21 +6,21 @@ const CartTotal = () => {
   const { currency, totalAmount, deleveryFee } = useContext(shopContext);
   return (
     <>
-      <div className="flex flex-col sm:items-end mt-10">
+      <div className="">
         <Title heading="cart totals" />
-        <div className="flex justify-between sm:w-[27%] border-b-2 border-gray-200 py-3">
+        <div className="flex justify-between border-b-2 border-gray-200 py-3">
           <h3>Subtotal</h3>
           <span>
             {currency} {totalAmount()} BDT
           </span>
         </div>
-        <div className="flex justify-between sm:w-[27%] border-b-2 border-gray-200 py-3">
+        <div className="flex justify-between border-b-2 border-gray-200 py-3">
           <h3>Shipping Fee</h3>
           <span>
             {currency} {deleveryFee}
           </span>
         </div>
-        <div className="flex justify-between sm:w-[27%] py-3">
+        <div className="flex justify-between py-3">
           <h3>Total</h3>
           <span>
             {currency}

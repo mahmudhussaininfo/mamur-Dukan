@@ -3,12 +3,14 @@ import { shopContext } from "../context/Context";
 import Title from "../components/Title";
 import { FaRegTrashAlt } from "react-icons/fa";
 import CartTotal from "../components/cartTotal";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { currency, cart, products, updateCartQuantity } =
     useContext(shopContext);
   const [cartData, setCartData] = useState([]);
-  console.log(cartData);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const temp = [];
@@ -92,10 +94,13 @@ const Cart = () => {
 
         {/* total */}
 
-        <div className="">
+        <div className="flex flex-col sm:items-end w-full mt-10">
           <CartTotal />
           <div className="w-full text-end">
-            <button className="bg-green-600 font-semibold cursor-pointer text-white mt-5 px-5 py-2 rounded-md">
+            <button
+              onClick={() => navigate("/place-order")}
+              className="bg-green-600 font-semibold cursor-pointer text-white mt-5 px-5 py-2 rounded-md"
+            >
               Proceed To Checkout
             </button>
           </div>

@@ -9,6 +9,7 @@ import Layout from "./components/Layout/Layout";
 import Shop from "./pages/Shop";
 import SingleProduct from "./components/SingleProduct";
 import Cart from "./pages/Cart";
+import PlaceOrder from "./components/PlaceOrder";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:id" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/place-order" element={<PlaceOrder />} />
         </Routes>
       </Layout>
     </>
