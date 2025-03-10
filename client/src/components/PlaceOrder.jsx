@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import CartTotal from "./cartTotal";
 import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
+  const [method, setMethod] = useState("Cash");
+
   const navigate = useNavigate();
   return (
     <>
@@ -86,6 +88,57 @@ const PlaceOrder = () => {
               className="bg-green-600 font-semibold cursor-pointer text-white mt-5 px-5 py-2 rounded-md"
             >
               Proceed To Checkout
+            </button>
+          </div>
+
+          {/* ========= Payment method ===============*/}
+          <div className="flex items-end gap-2">
+            <h1 className="font-semibold text-xl uppercase mt-10">
+              payment method
+            </h1>
+            <hr className="w-40 max-sm:hidden" />
+          </div>
+          <div className="flex gap-2 mt-7">
+            <div
+              onClick={() => setMethod("Stripe")}
+              className=" cursor-pointer flex gap-2 items-center border p-3 rounded text-white bg-blue-500"
+            >
+              <p
+                className={`min-w-3.5 h-3.5 border rounded-full ${
+                  method === "Stripe" ? "bg-green-600 border-green-600" : ""
+                }`}
+              ></p>
+              <p>Stripe</p>
+            </div>
+            <div
+              onClick={() => setMethod("Razo")}
+              className=" cursor-pointer flex gap-2 items-center border p-3 rounded text-white bg-orange-500"
+            >
+              <p
+                className={`min-w-3.5 h-3.5 border rounded-full ${
+                  method === "Razo" ? "bg-green-600 border-green-600" : ""
+                }`}
+              ></p>
+              <p>RazoPay</p>
+            </div>
+            <div
+              onClick={() => setMethod("Cash")}
+              className="cursor-pointer flex gap-2 items-center border p-3 rounded text-white bg-black"
+            >
+              <p
+                className={`min-w-3.5 h-3.5 border rounded-full ${
+                  method === "Cash" ? "bg-green-600 border-green-600" : ""
+                }`}
+              ></p>
+              <p>Cash On Delivery</p>
+            </div>
+          </div>
+          <div className="w-full">
+            <button
+              onClick={() => navigate("/my-order")}
+              className="bg-green-600 font-semibold cursor-pointer text-white mt-5 px-5 py-2 rounded-md"
+            >
+              Place Order
             </button>
           </div>
         </div>
