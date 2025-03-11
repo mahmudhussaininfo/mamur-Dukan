@@ -9,6 +9,7 @@ import { shopContext } from "../../context/Context.jsx";
 
 const Header = () => {
   const [visible, setVisible] = useState(false);
+
   const { search, setSearch, searchShow, setSearchShow, cartCount } =
     useContext(shopContext);
 
@@ -49,7 +50,7 @@ const Header = () => {
               <CgProfile className="text-3xl" />
               <div className="hidden group-hover:block absolute right-0">
                 <div className="flex flex-col gap-2 w-36 px-5 py-3 bg-slate-100 rounded-md">
-                  <Link className="cursor-pointer hover:font-bold">
+                  <Link to="/login" className="cursor-pointer hover:font-bold">
                     My Profile
                   </Link>
                   <Link className="cursor-pointer hover:font-bold">Orders</Link>

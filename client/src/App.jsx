@@ -11,6 +11,7 @@ import SingleProduct from "./components/SingleProduct";
 import Cart from "./pages/Cart";
 import PlaceOrder from "./components/PlaceOrder";
 import MyOrder from "./components/MyOrder";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/my-order" element={<MyOrder />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Layout>
     </>
