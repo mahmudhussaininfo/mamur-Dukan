@@ -4,7 +4,6 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Contact from "./components/Contact";
 import Layout from "./components/Layout/Layout";
 import Shop from "./pages/Shop";
 import SingleProduct from "./components/SingleProduct";
@@ -12,6 +11,7 @@ import Cart from "./pages/Cart";
 import PlaceOrder from "./components/PlaceOrder";
 import MyOrder from "./components/MyOrder";
 import Login from "./pages/Login";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
           <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/my-order" element={<MyOrder />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>
     </>

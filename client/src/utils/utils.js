@@ -5,6 +5,8 @@ import exchange from "./exchange.png";
 import support from "./support.png";
 import quality from "./quality.png";
 import honey from "./honey.jpg";
+import about from "./about.jpg";
+import contact from "./contact.jpg";
 
 export const photo = {
   logoTransparent,
@@ -14,6 +16,8 @@ export const photo = {
   support,
   quality,
   honey,
+  about,
+  contact,
 };
 
 export const products = [
