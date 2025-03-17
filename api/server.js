@@ -5,6 +5,7 @@ import colors from "colors";
 import cookieParser from "cookie-parser";
 import mongoDbConnection from "./config/db.js";
 import router from "./routes/api.js";
+import { errorHandler } from "./middleware/errorHandle.js";
 
 const app = express();
 
@@ -27,6 +28,9 @@ app.use("/api", router);
 
 // connect to mongodb
 mongoDbConnection();
+
+// error handling middleware
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`.bgGreen.bold);
