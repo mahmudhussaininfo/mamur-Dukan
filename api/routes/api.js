@@ -2,6 +2,7 @@ import express from "express";
 import * as userController from "../controller/userController.js";
 import * as productController from "../controller/productController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
+import { upload } from "./../utils/multer.js";
 
 // ROUTING
 const router = express.Router();
@@ -14,7 +15,7 @@ router.get("/auth", authMiddleware, userController.getAuthUser);
 router.post("/reset-password", authMiddleware, userController.resetPassword);
 
 // products
-router.post("/create", authMiddleware, productController.createProduct);
+router.post("/create", authMiddleware, upload, productController.createProduct);
 
 //export
 export default router;

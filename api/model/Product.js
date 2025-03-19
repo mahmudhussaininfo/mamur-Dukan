@@ -14,8 +14,8 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    images: {
-      type: Array,
+    photo: {
+      type: String,
     },
     category: {
       type: String,
@@ -26,7 +26,6 @@ const productSchema = new mongoose.Schema(
     },
     sizes: {
       type: Array,
-      enum: ["S", "M", "L", "XL", "XXL"],
       default: ["S"],
     },
     bestSeller: {

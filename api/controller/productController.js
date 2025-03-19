@@ -15,10 +15,10 @@ export const createProduct = asyncHandler(async (req, res) => {
   }
 
   // images
-  let images = null;
+  let img = null;
   if (req.file) {
-    const files = await cloudUpload(req);
-    images = files.secure_url;
+    const file = await cloudUpload(req);
+    img = file.secure_url;
   }
 
   // Create new product
@@ -30,7 +30,7 @@ export const createProduct = asyncHandler(async (req, res) => {
     subCategory,
     sizes,
     bestSeller,
-    images,
+    photo: img,
   });
 
   return res.status(201).json({

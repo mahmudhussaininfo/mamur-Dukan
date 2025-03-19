@@ -43,7 +43,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 // login user
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOnee({ email });
+  const user = await User.findOne({ email });
   if (!user)
     return res.status(400).json({ success: false, message: "No User Found" });
 
