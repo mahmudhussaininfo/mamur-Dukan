@@ -15,7 +15,8 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     photo: {
-      type: String,
+      type: Array,
+      default: [],
     },
     category: {
       type: String,

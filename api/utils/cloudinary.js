@@ -7,7 +7,8 @@ cloudinary.v2.config({
 });
 
 // cloud upload
-export const cloudUpload = async (req) => {
-  const upload = await cloudinary.v2.uploader.upload(req.file.path);
-  return upload;
+export const cloudUpload = async (files) => {
+  const uploads = files.map((file) => cloudinary.v2.uploader.upload(file.path));
+  const urls = await Promise.all(uploads);
+  return urls.map((url) => url.secure_url);
 };
