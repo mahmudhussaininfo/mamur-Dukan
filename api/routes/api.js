@@ -14,6 +14,9 @@ router.post("/login", userController.loginUser);
 router.get("/auth", authMiddleware, userController.getAuthUser);
 router.post("/reset-password", authMiddleware, userController.resetPassword);
 
+// admin routes
+router.post("/admin", userController.adminLogin);
+
 // products
 router.get("/products", productController.listProducts);
 router.post(

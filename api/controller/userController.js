@@ -53,22 +53,10 @@ export const loginUser = asyncHandler(async (req, res) => {
       .status(400)
       .json({ success: false, message: "Incorrect Password" });
   }
-
-  let token = await tokenEncode(email);
-
-  const options = {
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-  };
-  res.cookie("Token", token, options);
-
   return res.status(201).json({
     success: true,
     message: "User login successfully",
     user,
-    token,
   });
 });
 
@@ -103,4 +91,34 @@ export const resetPassword = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json({ success: true, message: "Password updated successfully" });
+});
+
+/**
+ * @admin login
+ */
+
+export const adminLogin = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  if (
+    email === process.env.ADMIN_EMAIL &&
+    password === process.env.ADMIN_PASSWORD
+  ) {
+    let token = await tokenEncode(email);
+
+    const options = {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    };
+    res.cookie("Token", token, options);
+    return res
+      .status(200)
+      .json({ success: true, message: "Admin login successful", token });
+  } else {
+    return res
+      .status(401)
+      .json({ success: false, message: "Invalid credentials" });
+  }
 });
