@@ -7,9 +7,11 @@ import Layout from "./components/Layout/Layout";
 import Add from "./components/Add";
 import List from "./components/List";
 import { useState } from "react";
+import Login from "./pages/Login";
+import Error from "./pages/Error";
 
 function App() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState("4");
   return (
     <>
       <Layout>
@@ -20,8 +22,9 @@ function App() {
               <Route path="list" element={<List />} />
             </Route>
           ) : (
-            <Route path="/login" element="" />
+            <Route path="/" element={<Login />} />
           )}
+          <Route path="*" element={<Error />} />
         </Routes>
       </Layout>
     </>
