@@ -6,17 +6,19 @@ import Home from "./pages/Home";
 import Layout from "./components/Layout/Layout";
 import Add from "./components/Add";
 import List from "./components/List";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Login from "./pages/Login";
 import Error from "./pages/Error";
+import { adminContext } from "./context/Context";
 
 function App() {
-  const [token, setToken] = useState("4");
+  const { token, setToken } = useContext(adminContext);
+
   return (
     <>
       <Layout>
         <Routes>
-          {token === "" ? (
+          {token ? (
             <Route path="/" element={<Home />}>
               <Route path="add" element={<Add />} />
               <Route path="list" element={<List />} />

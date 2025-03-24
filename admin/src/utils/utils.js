@@ -7,6 +7,7 @@ import quality from "./quality.png";
 import honey from "./honey.jpg";
 import about from "./about.jpg";
 import contact from "./contact.jpg";
+import image from "./image.jpg";
 
 export const photo = {
   logoTransparent,
@@ -18,6 +19,7 @@ export const photo = {
   honey,
   about,
   contact,
+  image,
 };
 
 export const products = [

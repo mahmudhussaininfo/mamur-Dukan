@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { photo } from "../../utils/utils.js";
+import { adminContext } from "../../context/Context.jsx";
 
 const Header = () => {
+  const { setToken } = useContext(adminContext);
   return (
     <>
       <div className="border-b-2 border-gray-200 pb-3 shadow-md">
@@ -13,7 +15,7 @@ const Header = () => {
             </Link>
           </div>
           <div>
-            <button>Logout</button>
+            <button onClick={() => setToken("")}>Logout</button>
           </div>
         </div>
       </div>
