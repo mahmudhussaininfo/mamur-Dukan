@@ -5,6 +5,23 @@ const Add = () => {
   const [image, setImage] = useState([]);
   const fileRef = useRef(null);
 
+  const [input, setInput] = useState({
+    name: "",
+    description: "",
+    category: "Men",
+    subCategory: "Tshirt",
+    sizes: [],
+    bestSeller: false,
+    salary: "",
+  });
+
+  const handleChange = (e) => {
+    setInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const handleClick = () => {
     fileRef.current.click();
   };
@@ -21,81 +38,132 @@ const Add = () => {
   };
   return (
     <>
-      <div className="flex flex-col">
-        {/* upload images */}
-        <div className="py-3">
-          <h1>Upload Image</h1>
-          <input
-            type="file"
-            className="hidden"
-            ref={fileRef}
-            multiple
-            onChange={handleImageChange}
-          />
+      <div className="flex flex-col py-3 px-5">
+        <form>
+          {/* upload images */}
+          <div className="py-3">
+            <h1>Upload Image</h1>
+            <input
+              type="file"
+              className="hidden"
+              ref={fileRef}
+              multiple
+              onChange={handleImageChange}
+            />
 
-          <div onClick={handleClick}>
-            <GrGallery className="mb-5 text-7xl border border-gray-300 p-3 cursor-pointer" />
+            <div onClick={handleClick}>
+              <GrGallery className="mb-5 text-7xl border border-gray-300 p-3 cursor-pointer" />
+            </div>
+            <div className="flex gap-5">
+              {image.map((img, index) => (
+                <div key={index} className="relative">
+                  <img className="w-40 object-cover" src={img} alt="" />
+                  <button
+                    className="cursor-pointer absolute top-0 right-0 bg-gray-400 text-gray-800 rounded-full w-5 h-5 flex items-center justify-center text-xs hover:text-xl"
+                    onClick={() => removeImage(index)}
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
+          <div>
+            <h2 className="mb-2">Product Name</h2>
+            <input
+              type="text"
+              placeholder="Product Name"
+              onChange={handleChange}
+              name="name"
+              value={input.name}
+              className="border w-full sm:w-[35%] border-gray-200 rounded-md outline-none p-2"
+            />
+          </div>
+          <div>
+            <h2 className="py-2">Product Description</h2>
+            <textarea
+              onChange={handleChange}
+              name="description"
+              value={input.description}
+              placeholder="Product Description"
+              className="border w-full sm:w-[35%] border-gray-200 rounded-md outline-none p-2 h-40"
+            />
+          </div>
+          {/* dropdown */}
           <div className="flex gap-5">
-            {image.map((img, index) => (
-              <div key={index} className="relative">
-                <img className="w-40 object-cover" src={img} alt="" />
-                <button
-                  className="cursor-pointer absolute top-0 right-0 bg-gray-400 text-gray-800 rounded-full w-5 h-5 flex items-center justify-center text-xs hover:text-xl"
-                  onClick={() => removeImage(index)}
-                >
-                  X
-                </button>
-              </div>
-            ))}
+            <div>
+              <h2>Product Category</h2>
+              <select
+                onChange={handleChange}
+                name="category"
+                value={input.category}
+                className="border w-full border-gray-200 rounded-md outline-none p-2"
+              >
+                <option value="">Select Category</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+              </select>
+            </div>
+            <div>
+              <h2>Sub Category</h2>
+              <select
+                onChange={handleChange}
+                name="subCategory"
+                value={input.subCategory}
+                className="border w-full border-gray-200 rounded-md outline-none p-2"
+              >
+                <option value="">Select Category</option>
+                <option value="Tshirt">Tshirt</option>
+                <option value="hudai">dfsdf</option>
+                <option value="dfsdf">fdfsdf</option>
+              </select>
+            </div>
+            <div>
+              <h2>Price</h2>
+              <input
+                type="number"
+                placeholder="500"
+                onChange={handleChange}
+                name="salary"
+                value={input.salary}
+                className="border w-full sm:w-[50%] border-gray-200 rounded-md outline-none p-2"
+              />
+            </div>
           </div>
-        </div>
-        <div>
-          <h2 className="mb-2">Product Name</h2>
-          <input
-            type="text"
-            placeholder="Product Name"
-            className="border w-full sm:w-[25%] border-gray-200 rounded-md outline-none p-2"
-          />
-        </div>
-        <div>
-          <h2 className="py-2">Product Description</h2>
-          <textarea
-            placeholder="Product Description"
-            className="border w-full sm:w-[25%] border-gray-200 rounded-md outline-none p-2 h-40"
-          />
-        </div>
-
-        {/* dropdown */}
-        <div className="flex gap-5">
+          <div className="mt-5">
+            <h2>Product Sizes</h2>
+            <div className="flex gap-4 mt-2">
+              <span className="bg-gray-200 p-2 rounded">S</span>
+              <span className="bg-gray-200 p-2 rounded">M</span>
+              <span className="bg-gray-200 p-2 rounded">X</span>
+              <span className="bg-gray-200 p-2 rounded">L</span>
+              <span className="bg-gray-200 p-2 rounded">XL</span>
+              <span className="bg-gray-200 p-2 rounded">XLL</span>
+            </div>
+          </div>
+          <div className="mt-5">
+            <label htmlFor="bestSeller" className="cursor-pointer">
+              <input
+                name="bestSeller"
+                checked={input.bestSeller}
+                onChange={handleChange}
+                id="bestSeller"
+                className="cursor-pointer"
+                type="checkbox"
+              />{" "}
+              Add to BestSeller
+            </label>
+          </div>
           <div>
-            <h2>Product Category</h2>
-            <select className="border w-full border-gray-200 rounded-md outline-none p-2">
-              <option value="">Select Category</option>
-              <option value="1">Category 1</option>
-              <option value="2">Category 2</option>
-              <option value="3">Category 3</option>
-            </select>
+            <button
+              type="submit"
+              className="bg-green-500 mt-5 cursor-pointer text-white px-5 py-2 rounded"
+            >
+              Add Product
+            </button>
           </div>
-          <div>
-            <h2>Product Category</h2>
-            <select className="border w-full border-gray-200 rounded-md outline-none p-2">
-              <option value="">Select Category</option>
-              <option value="1">Category 1</option>
-              <option value="2">Category 2</option>
-              <option value="3">Category 3</option>
-            </select>
-          </div>
-          <div>
-            <h2>Product Category</h2>
-            <select className="border w-full border-gray-200 rounded-md outline-none p-2">
-              <option value="">Select Category</option>
-              <option value="1">Category 1</option>
-              <option value="2">Category 2</option>
-              <option value="3">Category 3</option>
-            </select>
-          </div>
-        </div>
+        </form>
       </div>
     </>
   );

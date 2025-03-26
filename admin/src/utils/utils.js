@@ -8,9 +8,11 @@ import honey from "./honey.jpg";
 import about from "./about.jpg";
 import contact from "./contact.jpg";
 import image from "./image.jpg";
+import admin from "./mamuAdmin.png";
 
 export const photo = {
   logoTransparent,
+  admin,
   logo,
   product,
   exchange,

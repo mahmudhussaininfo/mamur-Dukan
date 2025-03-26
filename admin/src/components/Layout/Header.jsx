@@ -11,11 +11,16 @@ const Header = () => {
         <div className="flex justify-between items-center container mx-auto py-3 px-5">
           <div>
             <Link to="/">
-              <img className="h-14" src={photo.logo} alt="" />
+              <img className="h-14" src={photo.admin} alt="" />
             </Link>
           </div>
           <div>
-            <button onClick={() => setToken("")}>Logout</button>
+            <button
+              className="bg-green-500 text-white cursor-pointer font-semibold p-3 rounded"
+              onClick={() => setToken("")}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>
