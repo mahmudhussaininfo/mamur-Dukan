@@ -5,20 +5,31 @@ const Add = () => {
   const [image, setImage] = useState([]);
   const fileRef = useRef(null);
 
+  // Category-wise subcategories
+  const subCategories = {
+    Men: ["Tshirt", "Pants", "Shoes"],
+    Women: ["Sari", "Mexi", "Burqa"],
+    Kids: ["Tshirt", "Pants", "Half Pant"],
+  };
+
   const [input, setInput] = useState({
     name: "",
     description: "",
     category: "Men",
     subCategory: "Tshirt",
     sizes: [],
-    bestSeller: false,
+    bestSeller: true,
     salary: "",
   });
 
+  // Handle input change
   const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
     setInput((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: type === "checkbox" ? checked : value,
+      // Reset subCategory when category changes
+      ...(name === "category" && { subCategory: subCategories[value][0] }),
     }));
   };
 
@@ -35,6 +46,16 @@ const Add = () => {
   // remove image
   const removeImage = (index) => {
     setImage(image.filter((_, i) => i !== index));
+  };
+
+  // Handle size selection
+  const toggleSize = (size) => {
+    setInput((prev) => ({
+      ...prev,
+      sizes: prev.sizes.includes(size)
+        ? prev.sizes.filter((item) => item !== size) // Remove if exists
+        : [...prev.sizes, size], // Add if not exists
+    }));
   };
   return (
     <>
@@ -99,7 +120,6 @@ const Add = () => {
                 value={input.category}
                 className="border w-full border-gray-200 rounded-md outline-none p-2"
               >
-                <option value="">Select Category</option>
                 <option value="Men">Men</option>
                 <option value="Women">Women</option>
                 <option value="Kids">Kids</option>
@@ -113,10 +133,11 @@ const Add = () => {
                 value={input.subCategory}
                 className="border w-full border-gray-200 rounded-md outline-none p-2"
               >
-                <option value="">Select Category</option>
-                <option value="Tshirt">Tshirt</option>
-                <option value="hudai">dfsdf</option>
-                <option value="dfsdf">fdfsdf</option>
+                {subCategories[input.category]?.map((sub, index) => (
+                  <option key={index} value={sub}>
+                    {sub}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
@@ -134,12 +155,19 @@ const Add = () => {
           <div className="mt-5">
             <h2>Product Sizes</h2>
             <div className="flex gap-4 mt-2">
-              <span className="bg-gray-200 p-2 rounded">S</span>
-              <span className="bg-gray-200 p-2 rounded">M</span>
-              <span className="bg-gray-200 p-2 rounded">X</span>
-              <span className="bg-gray-200 p-2 rounded">L</span>
-              <span className="bg-gray-200 p-2 rounded">XL</span>
-              <span className="bg-gray-200 p-2 rounded">XLL</span>
+              {["S", "M", "X", "L", "XL", "XXL", "MD"].map((size) => (
+                <span
+                  key={size}
+                  onClick={() => toggleSize(size)}
+                  className={`p-2 rounded cursor-pointer ${
+                    input.sizes.includes(size)
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200"
+                  }`}
+                >
+                  {size}
+                </span>
+              ))}
             </div>
           </div>
           <div className="mt-5">
@@ -151,7 +179,7 @@ const Add = () => {
                 id="bestSeller"
                 className="cursor-pointer"
                 type="checkbox"
-              />{" "}
+              />
               Add to BestSeller
             </label>
           </div>
