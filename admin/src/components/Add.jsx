@@ -1,7 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { GrGallery } from "react-icons/gr";
+import { adminContext } from "../context/Context";
+import axios from "axios";
 
 const Add = () => {
+  const { BASE, token } = useContext(adminContext);
+
   const [image, setImage] = useState([]);
   const fileRef = useRef(null);
 
@@ -48,19 +52,58 @@ const Add = () => {
     setImage(image.filter((_, i) => i !== index));
   };
 
+  // for sizes
+  const sizeModels = ["S", "M", "X", "L", "XL", "XXL"];
+
   // Handle size selection
-  const toggleSize = (size) => {
+  const handleSizeClick = (size) => {
     setInput((prev) => ({
       ...prev,
       sizes: prev.sizes.includes(size)
-        ? prev.sizes.filter((item) => item !== size) // Remove if exists
-        : [...prev.sizes, size], // Add if not exists
+        ? prev.sizes.filter((item) => item !== size)
+        : [...prev.sizes, size],
     }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    formData.append("name", input.name);
+    formData.append("description", input.description);
+    formData.append("category", input.category);
+    formData.append("subCategory", input.subCategory);
+    formData.append("sizes", JSON.stringify(input.sizes));
+    formData.append("bestSeller", input.bestSeller);
+    formData.append("salary", input.salary);
+    // Append images to form data
+    const files = fileRef.current.files;
+    for (let i = 0; i < files.length; i++) {
+      formData.append("photos", files[i]);
+    }
+
+    try {
+      const { data } = await axios.post(`${BASE}/create`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+      if (data.success) {
+        console.log(data);
+      } else {
+        console.log("Error: Failed to create product");
+        console.log(error.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   return (
     <>
       <div className="flex flex-col py-3 px-5">
-        <form>
+        <form onSubmit={handleSubmit}>
           {/* upload images */}
           <div className="py-3">
             <h1>Upload Image</h1>
@@ -155,15 +198,15 @@ const Add = () => {
           <div className="mt-5">
             <h2>Product Sizes</h2>
             <div className="flex gap-4 mt-2">
-              {["S", "M", "X", "L", "XL", "XXL", "MD"].map((size) => (
+              {sizeModels.map((size) => (
                 <span
                   key={size}
-                  onClick={() => toggleSize(size)}
-                  className={`p-2 rounded cursor-pointer ${
+                  className={`cursor-pointer p-2 ${
                     input.sizes.includes(size)
-                      ? "bg-blue-500 text-white"
+                      ? "bg-gray-500 text-white"
                       : "bg-gray-200"
                   }`}
+                  onClick={() => handleSizeClick(size)}
                 >
                   {size}
                 </span>
