@@ -2,11 +2,13 @@ import React, { useContext, useRef, useState } from "react";
 import { GrGallery } from "react-icons/gr";
 import { adminContext } from "../context/Context";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Add = () => {
   const { BASE, token } = useContext(adminContext);
 
   const [image, setImage] = useState([]);
+  const [loading, setLoading] = useState(false);
   const fileRef = useRef(null);
 
   // Category-wise subcategories
@@ -23,7 +25,7 @@ const Add = () => {
     subCategory: "Tshirt",
     sizes: [],
     bestSeller: true,
-    salary: "",
+    price: "",
   });
 
   // Handle input change
@@ -67,20 +69,37 @@ const Add = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    if (
+      !input.name ||
+      !input.description ||
+      !input.price ||
+      !input.category ||
+      !fileRef.current.files.length
+    ) {
+      return Swal.fire({
+        title: "Error",
+        icon: "error",
+        text: "All Fields are required",
+      });
+    }
 
+    setLoading(true);
+    const formData = new FormData();
     formData.append("name", input.name);
     formData.append("description", input.description);
     formData.append("category", input.category);
     formData.append("subCategory", input.subCategory);
     formData.append("sizes", JSON.stringify(input.sizes));
     formData.append("bestSeller", input.bestSeller);
-    formData.append("salary", input.salary);
+    formData.append("price", input.price);
     // Append images to form data
-    const files = fileRef.current.files;
-    for (let i = 0; i < files.length; i++) {
-      formData.append("photos", files[i]);
-    }
+    // const files = fileRef.current.files;
+    // for (let i = 0; i < files.length; i++) {
+    //   formData.append("photos", files[i]);
+    // }
+    Array.from(fileRef.current.files).forEach((file) => {
+      formData.append("photos", file);
+    });
 
     try {
       const { data } = await axios.post(`${BASE}/create`, formData, {
@@ -91,13 +110,39 @@ const Add = () => {
         withCredentials: true,
       });
       if (data.success) {
-        console.log(data);
+        setInput({
+          name: "",
+          description: "",
+          category: "Men",
+          subCategory: "Tshirt",
+          sizes: [],
+          bestSeller: true,
+          price: "",
+        });
+        setImage([]);
+        fileRef.current.value = "";
+        Swal.fire({
+          title: data.message,
+          icon: "success",
+        });
       } else {
-        console.log("Error: Failed to create product");
-        console.log(error.message);
+        setLoading(true);
+        Swal.fire({
+          title: "Error",
+          icon: "error",
+          text: data.message,
+        });
       }
     } catch (error) {
-      console.log(error.message);
+      setLoading(true);
+      Swal.fire({
+        title: "Error",
+        icon: "error",
+        text: data.message,
+      });
+      console.log(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -189,8 +234,8 @@ const Add = () => {
                 type="number"
                 placeholder="500"
                 onChange={handleChange}
-                name="salary"
-                value={input.salary}
+                name="price"
+                value={input.price}
                 className="border w-full sm:w-[50%] border-gray-200 rounded-md outline-none p-2"
               />
             </div>
@@ -229,9 +274,40 @@ const Add = () => {
           <div>
             <button
               type="submit"
-              className="bg-green-500 mt-5 cursor-pointer text-white px-5 py-2 rounded"
+              className={`bg-green-500 mt-5 text-white px-5 py-2 rounded flex items-center justify-center ${
+                loading
+                  ? "opacity-75 cursor-not-allowed"
+                  : "cursor-pointer hover:bg-green-600"
+              }`}
+              disabled={loading}
             >
-              Add Product
+              {loading ? (
+                <>
+                  <svg
+                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Processing...
+                </>
+              ) : (
+                "Add Product"
+              )}
             </button>
           </div>
         </form>
