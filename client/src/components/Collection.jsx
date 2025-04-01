@@ -10,7 +10,7 @@ const Collection = () => {
   useEffect(() => {
     const latest = products.slice(0, 9);
     setLatestProducts(latest);
-  }, []);
+  }, [products]);
 
   return (
     <>
@@ -30,7 +30,7 @@ const Collection = () => {
               name={item.name}
               id={item._id}
               price={item.price}
-              image={item.image}
+              photo={item.photo}
             />
           ))}
         </div>

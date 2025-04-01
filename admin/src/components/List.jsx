@@ -87,7 +87,7 @@ const List = () => {
                 <div className="flex justify-center">
                   <button
                     onClick={() => removeProducts(item._id)}
-                    className="cursor-pointer"
+                    className="cursor-pointer text-red-500 hover:text-red-700"
                   >
                     <LuTrash />
                   </button>

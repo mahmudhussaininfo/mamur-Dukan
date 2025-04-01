@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { shopContext } from "../context/Context";
 
-const ProdutctItem = ({ id, name, image, price }) => {
+const ProdutctItem = ({ id, name, photo, price }) => {
   const { currency } = useContext(shopContext);
 
   return (
@@ -12,7 +12,7 @@ const ProdutctItem = ({ id, name, image, price }) => {
           <div className="overflow-hidden">
             <img
               className="hover:scale-110 transition-all ease-in-out w-full"
-              src={image[0]}
+              src={photo[0]}
               alt=""
             />
           </div>

@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { products } from "../utils/utils.js";
+// import { products } from "../utils/utils.js";
 import Swl from "sweetalert2";
-
+import axios from "axios";
 export const shopContext = createContext();
+const BASE = import.meta.env.VITE_BACKEND_URL;
 
 const ContextProvider = ({ children }) => {
   // Initialize your state here
@@ -11,6 +12,7 @@ const ContextProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [searchShow, setSearchShow] = useState(false);
   const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
 
   // Add product to cart
   const addCart = ({ id, size }) => {
@@ -82,9 +84,28 @@ const ContextProvider = ({ children }) => {
     }
     return total;
   };
+
+  const getProducts = async () => {
+    try {
+      const response = await axios.get(`${BASE}/products`);
+      if (response) {
+        setProducts(response.data.products);
+      } else {
+        console.log("No response from server");
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   const values = {
     currency,
     products,
+    getProducts,
     search,
     setSearch,
     searchShow,

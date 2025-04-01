@@ -7,7 +7,7 @@ import ProdutctItem from "./ProdutctItem";
 const Products = () => {
   const [showFilter, setShowFilter] = useState(false);
 
-  const { products, search, searchShow } = useContext(shopContext);
+  const { products, search, searchShow, getProducts } = useContext(shopContext);
 
   const [product, setProduct] = useState([]);
 
@@ -106,7 +106,7 @@ const Products = () => {
 
   useEffect(() => {
     applyFilterProducts();
-  }, [category, search, searchShow]);
+  }, [category, search, searchShow, products]);
 
   return (
     <>
@@ -226,7 +226,7 @@ const Products = () => {
                 name={item.name}
                 id={item._id}
                 price={item.price}
-                image={item.image}
+                photo={item.photo}
               />
             ))}
           </div>
