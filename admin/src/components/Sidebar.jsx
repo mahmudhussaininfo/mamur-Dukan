@@ -14,7 +14,7 @@ const Sidebar = () => {
             <span className="">
               <IoAdd />
             </span>
-            <span className="hidden md:block">Add Items</span>
+            <span className="hidden md:block">Add Products</span>
           </NavLink>
           <NavLink
             className="flex items-center gap-3 p-3 border border-gray-200 justify-center"
@@ -23,7 +23,7 @@ const Sidebar = () => {
             <span className="">
               <IoAdd />
             </span>
-            <span className="hidden md:block">Add Items</span>
+            <span className="hidden md:block">List Products</span>
           </NavLink>
         </div>
       </div>

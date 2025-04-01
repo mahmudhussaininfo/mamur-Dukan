@@ -7,7 +7,7 @@ const Home = () => {
     <>
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 px-4">
+        <div className="flex-1 p-7">
           <Outlet />
         </div>
       </div>

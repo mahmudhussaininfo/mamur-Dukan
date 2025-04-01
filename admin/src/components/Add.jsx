@@ -16,6 +16,8 @@ const Add = () => {
     Men: ["Tshirt", "Pants", "Shoes"],
     Women: ["Sari", "Mexi", "Burqa"],
     Kids: ["Tshirt", "Pants", "Half Pant"],
+    Coffee: ["Nescafe", "Bru", "Nescafe Gold", "Ginjer", "Davidoff"],
+    Fruits: ["Banana", "Apple", "Watermelon", "Grapes", "Dalim"],
   };
 
   const [input, setInput] = useState({
@@ -69,13 +71,7 @@ const Add = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !input.name ||
-      !input.description ||
-      !input.price ||
-      !input.category ||
-      !fileRef.current.files.length
-    ) {
+    if (!input.name || !input.description || !input.price || !input.category) {
       return Swal.fire({
         title: "Error",
         icon: "error",
@@ -147,7 +143,7 @@ const Add = () => {
   };
   return (
     <>
-      <div className="flex flex-col py-3 px-5">
+      <div className="flex flex-col">
         <form onSubmit={handleSubmit}>
           {/* upload images */}
           <div className="py-3">
@@ -211,6 +207,8 @@ const Add = () => {
                 <option value="Men">Men</option>
                 <option value="Women">Women</option>
                 <option value="Kids">Kids</option>
+                <option value="Coffee">Coffee</option>
+                <option value="Fruits">Fruits</option>
               </select>
             </div>
             <div>
