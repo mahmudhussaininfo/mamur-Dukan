@@ -53,10 +53,20 @@ export const loginUser = asyncHandler(async (req, res) => {
       .status(400)
       .json({ success: false, message: "Incorrect Password" });
   }
+  let token = await tokenEncode(email);
+
+  const options = {
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  };
+  res.cookie("Token", token, options);
   return res.status(201).json({
     success: true,
     message: "User login successfully",
     user,
+    token,
   });
 });
 

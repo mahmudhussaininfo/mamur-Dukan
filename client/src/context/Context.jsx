@@ -1,11 +1,14 @@
 import { createContext, useEffect, useState } from "react";
-// import { products } from "../utils/utils.js";
 import Swl from "sweetalert2";
 import axios from "axios";
 export const shopContext = createContext();
 const BASE = import.meta.env.VITE_BACKEND_URL;
 
 const ContextProvider = ({ children }) => {
+  axios.defaults.withCredentials = true;
+  const [token, setToken] = useState(
+    localStorage.getItem("Token") ? localStorage.getItem("Token") : ""
+  );
   // Initialize your state here
   const currency = "৳";
   const deleveryFee = 60;
@@ -102,6 +105,10 @@ const ContextProvider = ({ children }) => {
     getProducts();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("Token", token);
+  }, [token]);
+
   const values = {
     currency,
     products,
@@ -116,6 +123,9 @@ const ContextProvider = ({ children }) => {
     updateCartQuantity,
     totalAmount,
     deleveryFee,
+    token,
+    setToken,
+    BASE,
   };
   return <shopContext.Provider value={values}>{children}</shopContext.Provider>;
 };
