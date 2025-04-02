@@ -27,7 +27,7 @@ const ReletedProducts = ({ category, id }) => {
               name={item.name}
               id={item._id}
               price={item.price}
-              image={item.image}
+              photo={item.photo[0]}
             />
           ))}
         </div>

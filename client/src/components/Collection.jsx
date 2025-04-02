@@ -30,7 +30,7 @@ const Collection = () => {
               name={item.name}
               id={item._id}
               price={item.price}
-              photo={item.photo}
+              photo={item.photo[0]}
             />
           ))}
         </div>

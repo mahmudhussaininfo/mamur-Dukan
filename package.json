@@ -1,0 +1,24 @@
+{
+  "name": "mamurdukan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server --prefix api\" \"npm run dev --prefix client\" \"npm run dev --prefix admin\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahmudhussaininfo/mamur-Dukan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mahmudhussaininfo/mamur-Dukan/issues"
+  },
+  "homepage": "https://github.com/mahmudhussaininfo/mamur-Dukan#readme",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

@@ -36,7 +36,6 @@ const Cart = () => {
         <div>
           {cartData.map((item, index) => {
             const product = products.find((data) => data._id === item._id);
-            console.log(product);
 
             return (
               <>
@@ -47,7 +46,7 @@ const Cart = () => {
                   <div className="flex items-start w-[25%]">
                     <img
                       className="w-16 object-cover"
-                      src={product.image[0]}
+                      src={product.photo[0]}
                       alt={product?.name}
                     />
                     <div>

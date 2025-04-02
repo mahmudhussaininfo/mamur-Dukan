@@ -10,6 +10,8 @@ const SingleProduct = () => {
   const { products, currency, addCart } = useContext(shopContext);
   const { id } = useParams();
   const [productData, setProductData] = useState(false);
+  console.log(productData);
+
   const [img, setImg] = useState("");
   const [size, setSize] = useState("");
 
@@ -18,7 +20,7 @@ const SingleProduct = () => {
     await products.map((item) => {
       if (item._id === id) {
         setProductData(item);
-        setImg(item.image[0]);
+        setImg(item.photo[0]);
         return null;
       }
     });
@@ -36,7 +38,7 @@ const SingleProduct = () => {
           {/*====================== products Image ===============================*/}
           <div className="flex flex-1 gap-5 flex-col-reverse sm:flex-row">
             <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-hidden justify-between sm:justify-normal w-full sm:w-[23%]">
-              {productData.image.map((item, index) => (
+              {productData?.photo?.map((item, index) => (
                 <img
                   className="w-[24%] sm:w-full mb-3 cursor-pointer shrink-0"
                   key={index}

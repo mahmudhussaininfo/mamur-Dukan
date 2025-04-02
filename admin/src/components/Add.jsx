@@ -18,6 +18,7 @@ const Add = () => {
     Kids: ["Tshirt", "Pants", "Half Pant"],
     Coffee: ["Nescafe", "Bru", "Nescafe Gold", "Ginjer", "Davidoff"],
     Fruits: ["Banana", "Apple", "Watermelon", "Grapes", "Dalim"],
+    Snacks: ["Chips", "Biscuits", "Noodles", "Chocolate", "Others"],
   };
 
   const [input, setInput] = useState({
@@ -209,6 +210,7 @@ const Add = () => {
                 <option value="Kids">Kids</option>
                 <option value="Coffee">Coffee</option>
                 <option value="Fruits">Fruits</option>
+                <option value="Snacks">Snacks</option>
               </select>
             </div>
             <div>

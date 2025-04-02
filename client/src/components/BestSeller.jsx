@@ -9,8 +9,8 @@ const BestSeller = () => {
   const { products } = useContext(shopContext);
 
   useEffect(() => {
-    const bestSeller = products.filter((data) => data.bestseller);
-    setBestProduct(bestSeller.slice(0, 6));
+    const best = products.filter((data) => data.bestSeller);
+    setBestProduct(best.slice(0, 6));
   }, [products]);
 
   return (
@@ -23,15 +23,16 @@ const BestSeller = () => {
         />
         {/* best seller */}
         <div className="py-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 gap-y-6">
-          {bestProduct.map((item, index) => (
-            <ProdutctItem
-              key={index}
-              id={item._id}
-              name={item.name}
-              price={item.price}
-              photo={item.photo}
-            />
-          ))}
+          {bestProduct.length > 0 &&
+            bestProduct.map((item, index) => (
+              <ProdutctItem
+                key={index}
+                id={item._id}
+                name={item.name}
+                price={item.price}
+                photo={item.photo[0]}
+              />
+            ))}
         </div>
       </div>
     </>

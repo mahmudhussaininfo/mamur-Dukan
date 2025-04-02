@@ -16,6 +16,7 @@ const Products = () => {
 
   // filter by category
   const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
 
   // for sorting with price & rating
   const [type, setType] = useState("relavent");
@@ -26,6 +27,15 @@ const Products = () => {
       setCategory((prev) => prev.filter((data) => data !== e.target.value));
     } else {
       setCategory((prev) => [...prev, e.target.value]);
+    }
+  };
+
+  // handle subcategory filter
+  const handleSubCategoryFilter = (e) => {
+    if (subCategory.includes(e.target.value)) {
+      setSubCategory((prev) => prev.filter((data) => data !== e.target.value));
+    } else {
+      setSubCategory((prev) => [...prev, e.target.value]);
     }
   };
 
@@ -47,6 +57,11 @@ const Products = () => {
     if (category.length > 0) {
       filterProduct = filterProduct.filter((item) =>
         category.includes(item.category)
+      );
+    }
+    if (subCategory.length > 0) {
+      filterProduct = filterProduct.filter((item) =>
+        subCategory.includes(item.subCategory)
       );
     }
     setProduct(filterProduct);
@@ -106,7 +121,7 @@ const Products = () => {
 
   useEffect(() => {
     applyFilterProducts();
-  }, [category, search, searchShow, products]);
+  }, [category, subCategory, search, searchShow, products]);
 
   return (
     <>
@@ -159,17 +174,44 @@ const Products = () => {
               <li className="flex gap-2 items-center">
                 <input
                   type="checkbox"
-                  id="random"
-                  value={"random"}
+                  id="fruits"
+                  value={"Fruits"}
                   onChange={handleCategoryFilter}
                 />
-                <label htmlFor="random">Random</label>
+                <label htmlFor="fruits">Fruits</label>
+              </li>
+              <li className="flex gap-2 items-center">
+                <input
+                  type="checkbox"
+                  id="snacks"
+                  value={"Snacks"}
+                  onChange={handleCategoryFilter}
+                />
+                <label htmlFor="snacks">Snacks</label>
+              </li>
+              <li className="flex gap-2 items-center">
+                <input
+                  type="checkbox"
+                  id="coffee"
+                  value={"Coffee"}
+                  onChange={handleCategoryFilter}
+                />
+                <label htmlFor="coffee">Coffee</label>
               </li>
             </ul>
           </div>
           <div className="border border-gray-200 rounded p-4 mt-5">
-            <h4 className="font-semibold mb-2">Types</h4>
+            <h4 className="font-semibold mb-2">Sub Category</h4>
             <ul className="flex flex-col gap-1">
+              <li className="flex gap-2 items-center">
+                <input
+                  type="checkbox"
+                  id="chips"
+                  value={"Chips"}
+                  onChange={handleSubCategoryFilter}
+                />
+                <label htmlFor="chips">Chips</label>
+              </li>
               <li className="flex gap-2 items-center">
                 <input type="checkbox" />
                 Fruites
@@ -226,7 +268,7 @@ const Products = () => {
                 name={item.name}
                 id={item._id}
                 price={item.price}
-                photo={item.photo}
+                photo={item.photo[0]}
               />
             ))}
           </div>
