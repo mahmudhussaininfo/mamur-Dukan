@@ -7,7 +7,10 @@ const ProdutctItem = ({ id, name, photo, price }) => {
 
   return (
     <>
-      <Link className="cursor-pointer" to={`/shop/${id}`}>
+      <Link
+        className="cursor-pointer border border-gray-200"
+        to={`/shop/${id}`}
+      >
         <div className="text-center">
           <div className="overflow-hidden">
             <img

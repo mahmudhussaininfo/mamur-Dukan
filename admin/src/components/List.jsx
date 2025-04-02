@@ -65,10 +65,11 @@ const List = () => {
         <h1>Add Product List</h1>
         {/* Produtcs List Table */}
         <div className="flex flex-col">
-          <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] gap-4 p-3 bg-gray-100 text-sm">
+          <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr_1fr] gap-4 p-3 bg-gray-100 text-sm">
             <b>Image</b>
             <b>Name</b>
             <b>Category</b>
+            <b>Sub Category</b>
             <b>Price</b>
             <b className="text-center">Action</b>
           </div>
@@ -78,11 +79,12 @@ const List = () => {
             list.map((item, index) => (
               <div
                 key={index}
-                className="grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] gap-4 p-3 border-b-2 border-gray-200 text-sm"
+                className="grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr_1fr] gap-4 p-3 border-b-2 border-gray-200 text-sm"
               >
                 <img src={item.photo[0]} className="w-12" alt="" />
                 <span>{item.name}</span>
                 <span>{item.category}</span>
+                <span>{item.subCategory}</span>
                 <span>{item.price}</span>
                 <div className="flex justify-center">
                   <button
