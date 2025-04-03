@@ -21,7 +21,7 @@ const MyOrder = () => {
               <div className="flex items-start w-[25%]">
                 <img
                   className="w-16 object-cover"
-                  src={item.image[0]}
+                  src={item.photo[0]}
                   alt={item.name}
                 />
                 <div>

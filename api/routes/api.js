@@ -1,6 +1,7 @@
 import express from "express";
 import * as userController from "../controller/userController.js";
 import * as productController from "../controller/productController.js";
+import * as cartController from "../controller/cartController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import { uploads } from "./../utils/multer.js";
 
@@ -11,6 +12,7 @@ const router = express.Router();
 router.get("/users", userController.getAllUsers);
 router.post("/register", userController.registerUser);
 router.post("/login", userController.loginUser);
+router.get("/logout", userController.logoutUser);
 router.get("/auth", authMiddleware, userController.getAuthUser);
 router.post("/reset-password", authMiddleware, userController.resetPassword);
 
@@ -27,6 +29,9 @@ router.post(
 );
 router.post("/removeProduct", authMiddleware, productController.removeProduct);
 router.get("/singleProduct/:id", productController.getSingleProduct);
+
+// cart
+router.post("/addToCart", authMiddleware, cartController.addToCart);
 
 //export
 export default router;

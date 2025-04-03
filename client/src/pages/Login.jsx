@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Title from "../components/Title";
 import { shopContext } from "../context/Context";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate();
   const { token, setToken, BASE } = useContext(shopContext);
   const [state, setState] = useState("Login");
   const [input, setInput] = useState({
@@ -40,6 +41,25 @@ const Login = () => {
         if (data.success) {
           console.log(data.user);
           setToken(data.token);
+          localStorage.setItem("Token", data.token);
+          Swal.fire({
+            icon: "success",
+            title: data.message,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: data.message,
+          });
+        }
+      } else {
+        const { data } = await axios.post(`${BASE}/register`, {
+          name: input.name,
+          email: input.email,
+          password: input.password,
+        });
+        if (data.success) {
+          setState("Login");
           Swal.fire({
             icon: "success",
             title: data.message,
@@ -59,6 +79,12 @@ const Login = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
 
   return (
     <>

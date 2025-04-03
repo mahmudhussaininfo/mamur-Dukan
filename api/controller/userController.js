@@ -70,6 +70,18 @@ export const loginUser = asyncHandler(async (req, res) => {
   });
 });
 
+// logout user with cookie clear
+export const logoutUser = asyncHandler(async (req, res) => {
+  res.clearCookie("Token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
+  return res
+    .status(200)
+    .json({ success: true, message: "Logout successfully" });
+});
+
 // get auth user
 export const getAuthUser = asyncHandler(async (req, res) => {
   const { email } = req.user;

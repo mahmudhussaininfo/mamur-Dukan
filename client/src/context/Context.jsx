@@ -6,9 +6,7 @@ const BASE = import.meta.env.VITE_BACKEND_URL;
 
 const ContextProvider = ({ children }) => {
   axios.defaults.withCredentials = true;
-  const [token, setToken] = useState(
-    localStorage.getItem("Token") ? localStorage.getItem("Token") : ""
-  );
+  const [token, setToken] = useState("");
   // Initialize your state here
   const currency = "৳";
   const deleveryFee = 60;
@@ -18,7 +16,7 @@ const ContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   // Add product to cart
-  const addCart = ({ id, size }) => {
+  const addCart = async ({ id, size }) => {
     if (!size) {
       return Swl.fire({
         icon: "error",
@@ -38,6 +36,26 @@ const ContextProvider = ({ children }) => {
     }
 
     setCart(cartData);
+
+    if (token) {
+      try {
+        await axios.post(
+          `${BASE}/addToCart`,
+          {
+            productId: id,
+            size,
+          },
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
   };
 
   //cart icon count
@@ -106,8 +124,10 @@ const ContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("Token", token);
-  }, [token]);
+    if (!token && localStorage.getItem("Token")) {
+      setToken(localStorage.getItem("Token"));
+    }
+  }, []);
 
   const values = {
     currency,

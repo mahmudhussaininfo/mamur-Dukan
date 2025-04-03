@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { photo } from "../../utils/utils.js";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
@@ -6,12 +6,40 @@ import { CgProfile } from "react-icons/cg";
 import { CiShoppingCart } from "react-icons/ci";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi";
 import { shopContext } from "../../context/Context.jsx";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
 
-  const { search, setSearch, searchShow, setSearchShow, cartCount } =
-    useContext(shopContext);
+  const {
+    search,
+    setSearch,
+    searchShow,
+    setSearchShow,
+    cartCount,
+    token,
+    setToken,
+    BASE,
+  } = useContext(shopContext);
+
+  const handleLogout = async () => {
+    try {
+      await axios.get(`${BASE}/logout`, {
+        withCredentials: true,
+      });
+      Swal.fire({
+        icon: "success",
+        title: "Logout successful",
+      });
+      localStorage.removeItem("Token");
+      setToken("");
+      navigate("/login");
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   return (
     <>
@@ -45,20 +73,39 @@ const Header = () => {
           <div className="text-3xl cursor-pointer">
             <IoSearchOutline onClick={() => setSearchShow(true)} />
           </div>
+
           <div>
             <div className="group relative cursor-pointer">
-              <CgProfile className="text-3xl" />
-              <div className="hidden group-hover:block absolute right-0">
-                <div className="flex flex-col gap-2 w-36 px-5 py-3 bg-slate-100 rounded-md">
-                  <Link to="/login" className="cursor-pointer hover:font-bold">
-                    My Profile
-                  </Link>
-                  <Link className="cursor-pointer hover:font-bold">Orders</Link>
-                  <Link className="cursor-pointer hover:font-bold">Logout</Link>
+              <CgProfile
+                onClick={() => navigate("/login")}
+                className="text-3xl"
+              />
+
+              {/* =========== Drop Down ================ */}
+              {token && (
+                <div className="hidden group-hover:block absolute right-0">
+                  <div className="flex flex-col gap-2 w-36 px-5 py-3 bg-slate-100 rounded-md">
+                    <Link to="" className="cursor-pointer hover:font-bold">
+                      My Profile
+                    </Link>
+                    <Link
+                      to={"/my-order"}
+                      className="cursor-pointer hover:font-bold"
+                    >
+                      Orders
+                    </Link>
+                    <Link
+                      onClick={handleLogout}
+                      className="cursor-pointer hover:font-bold"
+                    >
+                      Logout
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
+
           <Link to="/cart" className="relative">
             <CiShoppingCart className="text-3xl cursor-pointer" />
             <p className="absolute top-3 right-0 text-white font-bold bg-green-500 rounded-full text-center aspect-square w-4 leading-4 text-sm">
