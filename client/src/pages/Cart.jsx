@@ -13,20 +13,22 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const temp = [];
-    for (const items in cart) {
-      for (const item in cart[items]) {
-        if (cart[items][item] > 0) {
-          temp.push({
-            _id: items,
-            size: item,
-            count: cart[items][item],
-          });
+    if (products.length > 0) {
+      const temp = [];
+      for (const items in cart) {
+        for (const item in cart[items]) {
+          if (cart[items][item] > 0) {
+            temp.push({
+              _id: items,
+              size: item,
+              count: cart[items][item],
+            });
+          }
         }
       }
+      setCartData(temp);
     }
-    setCartData(temp);
-  }, [cart]);
+  }, [cart, products]);
 
   return (
     <>
@@ -34,7 +36,7 @@ const Cart = () => {
         <Title heading={"Your Cart"} />
         <hr className="border border-gray-200" />
         <div>
-          {cartData.map((item, index) => {
+          {cartData?.map((item, index) => {
             const product = products.find((data) => data._id === item._id);
 
             return (
@@ -46,17 +48,17 @@ const Cart = () => {
                   <div className="flex items-start w-[25%]">
                     <img
                       className="w-16 object-cover"
-                      src={product.photo[0]}
+                      src={product?.photo[0]}
                       alt={product?.name}
                     />
                     <div>
-                      <h1 className="text-sm">{product.name}</h1>
+                      <h1 className="text-sm">{product?.name}</h1>
                       <div className="flex gap-3">
                         <span>
-                          {product.price}
+                          {product?.price}
                           {currency} BDT
                         </span>
-                        <span>{item.size}</span>
+                        <span>{item?.size}</span>
                       </div>
                     </div>
                   </div>

@@ -31,7 +31,9 @@ router.post("/removeProduct", authMiddleware, productController.removeProduct);
 router.get("/singleProduct/:id", productController.getSingleProduct);
 
 // cart
+router.get("/getCart", authMiddleware, cartController.getCart);
 router.post("/addToCart", authMiddleware, cartController.addToCart);
+router.post("/updateCart", authMiddleware, cartController.updateCart);
 
 //export
 export default router;

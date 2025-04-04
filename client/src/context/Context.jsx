@@ -90,6 +90,27 @@ const ContextProvider = ({ children }) => {
     let cartData = { ...cart };
     cartData[id][size] = quantity;
     setCart(cartData);
+
+    if (token) {
+      try {
+        axios.post(
+          `${BASE}/updateCart`,
+          {
+            productId: id,
+            size,
+            quantity,
+          },
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
   };
 
   // get total amount of cart
@@ -119,6 +140,25 @@ const ContextProvider = ({ children }) => {
     }
   };
 
+  // get user cart data from server
+  const getUserCart = async (token) => {
+    try {
+      const { data } = await axios.get(`${BASE}/getCart`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (data.success) {
+        setCart(data.cart);
+      } else {
+        console.log("No response from server");
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -126,6 +166,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     if (!token && localStorage.getItem("Token")) {
       setToken(localStorage.getItem("Token"));
+      getUserCart(localStorage.getItem("Token"));
     }
   }, []);
 
