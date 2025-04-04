@@ -118,6 +118,7 @@ const ContextProvider = ({ children }) => {
     let total = 0;
     for (const items in cart) {
       const product = products.find((data) => data._id === items);
+      if (!product) return null;
       for (const item in cart[items]) {
         if (cart[items][item] > 0) {
           total += product.price * cart[items][item];
