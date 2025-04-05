@@ -181,6 +181,7 @@ const ContextProvider = ({ children }) => {
     setSearchShow,
     cart,
     addCart,
+    setCart,
     cartCount,
     updateCartQuantity,
     totalAmount,

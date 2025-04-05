@@ -39,7 +39,6 @@ const Login = () => {
           }
         );
         if (data.success) {
-          console.log(data.user);
           setToken(data.token);
           localStorage.setItem("Token", data.token);
           Swal.fire({

@@ -41,7 +41,6 @@ const Login = () => {
           icon: "error",
           text: data.message,
         });
-        console.log(data.message);
       }
     } catch (error) {
       Swal.fire({
@@ -49,7 +48,6 @@ const Login = () => {
         icon: "error",
         text: error.response.data.message,
       });
-      console.log(error.response.data.message);
     }
     e.preventDefault();
   };

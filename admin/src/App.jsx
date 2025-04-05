@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from "react";
 import Login from "./pages/Login";
 import Error from "./pages/Error";
 import { adminContext } from "./context/Context";
+import Order from "./components/Order";
 
 function App() {
   const { token, setToken } = useContext(adminContext);
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />}>
               <Route path="add" element={<Add />} />
               <Route path="list" element={<List />} />
+              <Route path="order" element={<Order />} />
             </Route>
           ) : (
             <Route path="/" element={<Login />} />

@@ -2,6 +2,7 @@ import express from "express";
 import * as userController from "../controller/userController.js";
 import * as productController from "../controller/productController.js";
 import * as cartController from "../controller/cartController.js";
+import * as orderController from "../controller/orderController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import { uploads } from "./../utils/multer.js";
 
@@ -34,6 +35,11 @@ router.get("/singleProduct/:id", productController.getSingleProduct);
 router.get("/getCart", authMiddleware, cartController.getCart);
 router.post("/addToCart", authMiddleware, cartController.addToCart);
 router.post("/updateCart", authMiddleware, cartController.updateCart);
+
+// order
+router.post("/placeOrder", authMiddleware, orderController.placeOrder);
+router.get("/getUserOrders", authMiddleware, orderController.getOrders);
+router.get("/listOrders", authMiddleware, orderController.listOrders);
 
 //export
 export default router;

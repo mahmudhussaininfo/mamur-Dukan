@@ -10,7 +10,6 @@ const SingleProduct = () => {
   const { products, currency, addCart } = useContext(shopContext);
   const { id } = useParams();
   const [productData, setProductData] = useState(false);
-  console.log(productData);
 
   const [img, setImg] = useState("");
   const [size, setSize] = useState("");
