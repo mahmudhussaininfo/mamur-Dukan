@@ -1,4 +1,3 @@
-import React from "react";
 import { useContext } from "react";
 import { adminContext } from "../context/Context";
 import { useEffect } from "react";
@@ -30,7 +29,6 @@ const Order = () => {
     } else {
       fetechOrder();
     }
-    // eslint-disable-next-line
   }, [token]);
   return <>Order</>;
 };
