@@ -15,9 +15,10 @@
 </p>
 
 
-<span> Admin login Credential </span>
+<span> 😍 Admin login Credential </span>
 <p>  email : "admin@gmail.com",
     password : "mrmamu504" </p>
 
+<p>Project run command: npm start</p>
 
 <img align="center" width=600 src="https://github.com/mahmudhussaininfo/mamur-Dukan/blob/mrmamu/photo/mamur-Dukan.png"/>
