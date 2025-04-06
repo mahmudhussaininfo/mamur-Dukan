@@ -2,8 +2,15 @@
 
 <p align="left">
 🌍 Live Demo & GitHub Repository
+</p>
+
+<p>
 🔗 Live Demo: https://mamur-dukan-client.vercel.app
+</p>
+<p>
 🔗 Live Demo (ADMIN): https://mamur-dukan-admin.vercel.app
+</p>
+<p>
 💻 GitHub Repo: https://github.com/mahmudhussaininfo/mamur-Dukan
 </p>
 
