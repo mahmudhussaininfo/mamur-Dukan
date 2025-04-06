@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import CartTotal from "./cartTotal";
+import CartTotal from "./CartTotal";
 import { useNavigate } from "react-router-dom";
 import { shopContext } from "../context/Context";
 import axios from "axios";
