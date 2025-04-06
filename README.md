@@ -14,10 +14,13 @@
 💻 GitHub Repo: https://github.com/mahmudhussaininfo/mamur-Dukan
 </p>
 
+<hr/> </hr>
 
 <span> 😍 Admin login Credential </span>
 <p>  email : "admin@gmail.com",
     password : "mrmamu504" </p>
+
+<hr/>
 
 <p>Project run command: npm start</p>
 
