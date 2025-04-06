@@ -23,6 +23,11 @@ app.use(
   })
 );
 
+// serve static files
+app.get("/", (req, res) => {
+  res.send("API Working!");
+});
+
 // routes
 app.use("/api", router);
 
