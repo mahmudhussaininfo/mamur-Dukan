@@ -85,9 +85,6 @@ const Header = () => {
               {token && (
                 <div className="hidden group-hover:block absolute right-0">
                   <div className="flex flex-col gap-2 w-36 px-5 py-3 bg-slate-100 rounded-md">
-                    <Link to="" className="cursor-pointer hover:font-bold">
-                      My Profile
-                    </Link>
                     <Link
                       to={"/my-order"}
                       className="cursor-pointer hover:font-bold"
@@ -162,6 +159,13 @@ const Header = () => {
               to="/about"
             >
               About
+            </NavLink>
+            <NavLink
+              className="border-b border-b-gray-400 hover:bg-black w-full p-3 hover:text-white hover:scale-110 transition-all ease-in-out text-2xl"
+              onClick={() => setVisible(false)}
+              to="/my-order"
+            >
+              My Orders
             </NavLink>
           </div>
         </div>

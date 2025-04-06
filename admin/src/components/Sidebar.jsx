@@ -1,8 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IoAdd } from "react-icons/io5";
 import { PiListMagnifyingGlassLight } from "react-icons/pi";
+import { useContext, useEffect } from "react";
+import { adminContext } from "../context/Context";
 
 const Sidebar = () => {
+  const { token } = useContext(adminContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/list");
+    }
+  }, [token]);
   return (
     <>
       <div className="w-[14%] min-h-screen border-r-2 border-gray-200">

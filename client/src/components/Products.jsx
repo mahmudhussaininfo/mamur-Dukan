@@ -206,6 +206,15 @@ const Products = () => {
               <li className="flex gap-2 items-center">
                 <input
                   type="checkbox"
+                  id="Tshirt"
+                  value={"Tshirt"}
+                  onChange={handleSubCategoryFilter}
+                />
+                <label htmlFor="Tshirt">Tshirt</label>
+              </li>
+              <li className="flex gap-2 items-center">
+                <input
+                  type="checkbox"
                   id="chips"
                   value={"Chips"}
                   onChange={handleSubCategoryFilter}
@@ -213,20 +222,49 @@ const Products = () => {
                 <label htmlFor="chips">Chips</label>
               </li>
               <li className="flex gap-2 items-center">
-                <input type="checkbox" />
-                Fruites
+                <input
+                  type="checkbox"
+                  id="Pants"
+                  value={"Pants"}
+                  onChange={handleSubCategoryFilter}
+                />
+                <label htmlFor="Pants">Pants</label>
               </li>
               <li className="flex gap-2 items-center">
-                <input type="checkbox" />
-                Drinks
+                <input
+                  type="checkbox"
+                  id="Shoes"
+                  value={"Shoes"}
+                  onChange={handleSubCategoryFilter}
+                />
+                <label htmlFor="Shoes">Shoes</label>
               </li>
               <li className="flex gap-2 items-center">
-                <input type="checkbox" />
-                Kids
+                <input
+                  type="checkbox"
+                  id="Lungi"
+                  value={"Lungi"}
+                  onChange={handleSubCategoryFilter}
+                />
+                <label htmlFor="Lungi">Lungi</label>
               </li>
               <li className="flex gap-2 items-center">
-                <input type="checkbox" />
-                Random
+                <input
+                  type="checkbox"
+                  id="Panjabi"
+                  value={"Panjabi"}
+                  onChange={handleSubCategoryFilter}
+                />
+                <label htmlFor="Panjabi">Panjabi</label>
+              </li>
+              <li className="flex gap-2 items-center">
+                <input
+                  type="checkbox"
+                  id="Boxer"
+                  value={"Boxer"}
+                  onChange={handleSubCategoryFilter}
+                />
+                <label htmlFor="Boxer">Boxer</label>
               </li>
             </ul>
           </div>

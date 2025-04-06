@@ -1,46 +1,46 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { shopContext } from "../context/Context";
 import moment from "moment";
 import axios from "axios";
 
 const MyOrder = () => {
-  const { currency, products, BASE, token } = useContext(shopContext);
+  const { currency, BASE, token } = useContext(shopContext);
 
   const [orderData, setOrderData] = useState([]);
 
-  const fetchOrder = async () => {
-    try {
-      if (!token) {
-        return null;
-      }
-
-      const { data } = await axios.get(`${BASE}/getUserOrders`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (data.success) {
-        let orderItems = [];
-        data.userOrders.map((order) => {
-          order.items.map((item) => {
-            item["status"] = order.status;
-            item["payment"] = order.payment;
-            item["paymentMethod"] = order.paymentMethod;
-            orderItems.push(item);
-          });
-        });
-
-        setOrderData(orderItems);
-      }
-    } catch (error) {
-      console.log(error.response.data.message);
-    }
-  };
-
   useEffect(() => {
+    const fetchOrder = async () => {
+      try {
+        if (!token) {
+          return null;
+        }
+
+        const { data } = await axios.get(`${BASE}/getUserOrders`, {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (data.success) {
+          let orderItems = [];
+          data.userOrders.map((order) => {
+            order.items.map((item) => {
+              item["status"] = order.status;
+              item["payment"] = order.payment;
+              item["paymentMethod"] = order.paymentMethod;
+              orderItems.push(item);
+            });
+          });
+
+          setOrderData(orderItems);
+        }
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    };
+
     fetchOrder();
-  }, [token]);
+  }, [token, BASE]);
   return (
     <>
       <div className="container mx-auto min-h-[80vh] py-20">
@@ -76,7 +76,11 @@ const MyOrder = () => {
                 </div>
               </div>
               <div className="cursor-pointer flex gap-2 items-center p-3 rounded">
-                <p className={`min-w-3.5 h-3.5 bg-green-600 rounded-full`}></p>
+                <p
+                  className={`min-w-3.5 h-3.5 ${
+                    item.status === "Delivery" ? "bg-green-600" : "bg-red-500"
+                  }  rounded-full`}
+                ></p>
                 <p>{item.status}</p>
               </div>
               <div>

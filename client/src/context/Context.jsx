@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import Swl from "sweetalert2";
 import axios from "axios";
+import Swal from "sweetalert2";
 export const shopContext = createContext();
 const BASE = import.meta.env.VITE_BACKEND_URL;
 
@@ -34,6 +35,10 @@ const ContextProvider = ({ children }) => {
     } else {
       (cartData[id] = {}), (cartData[id][size] = 1);
     }
+    Swal.fire({
+      icon: "success",
+      title: "Added to Cart",
+    });
 
     setCart(cartData);
 

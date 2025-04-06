@@ -12,11 +12,13 @@ import PlaceOrder from "./components/PlaceOrder";
 import MyOrder from "./components/MyOrder";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <>
       <Layout>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

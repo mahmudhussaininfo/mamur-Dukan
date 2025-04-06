@@ -53,3 +53,12 @@ export const listOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({}).populate("user", "name email");
   res.status(200).json({ success: true, orders });
 });
+
+// update order status
+export const updateOrderStatus = asyncHandler(async (req, res) => {
+  const { status, id } = req.body;
+
+  const order = await Order.findByIdAndUpdate(id, { status }, { new: true });
+
+  res.status(200).json({ success: true, message: "Status Updated", order });
+});

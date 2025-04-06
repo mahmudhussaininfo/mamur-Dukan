@@ -38,6 +38,7 @@ router.post("/updateCart", authMiddleware, cartController.updateCart);
 
 // order
 router.post("/placeOrder", authMiddleware, orderController.placeOrder);
+router.post("/orderStatus", authMiddleware, orderController.updateOrderStatus);
 router.get("/getUserOrders", authMiddleware, orderController.getOrders);
 router.get("/listOrders", authMiddleware, orderController.listOrders);
 

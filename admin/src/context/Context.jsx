@@ -1,6 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { products } from "../utils/utils.js";
-import Swl from "sweetalert2";
 import axios from "axios";
 
 export const adminContext = createContext();
@@ -11,6 +9,7 @@ const ContextProvider = ({ children }) => {
   const [token, setToken] = useState(
     localStorage.getItem("Token") ? localStorage.getItem("Token") : ""
   );
+  const currency = "৳";
   useEffect(() => {
     localStorage.setItem("Token", token);
   }, [token]);
@@ -18,6 +17,7 @@ const ContextProvider = ({ children }) => {
     BASE,
     token,
     setToken,
+    currency,
   };
   return (
     <adminContext.Provider value={values}>{children}</adminContext.Provider>

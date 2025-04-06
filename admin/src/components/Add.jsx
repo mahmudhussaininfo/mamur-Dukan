@@ -13,9 +13,9 @@ const Add = () => {
 
   // Category-wise subcategories
   const subCategories = {
-    Men: ["Tshirt", "Pants", "Shoes"],
-    Women: ["Sari", "Mexi", "Burqa"],
-    Kids: ["Tshirt", "Pants", "Half Pant"],
+    Men: ["Tshirt", "Pants", "Shoes", "Panjabi", "Lungi", "Boxer"],
+    Women: ["Sari", "Kameez", "Abaya"],
+    Kids: ["Shoes", "T-Shirt", "Half Pant"],
     Coffee: ["Nescafe", "Bru", "Nescafe Gold", "Ginjer", "Davidoff"],
     Fruits: ["Banana", "Apple", "Watermelon", "Grapes", "Dalim"],
     Snacks: ["Chips", "Biscuits", "Noodles", "Chocolate", "Others"],
@@ -27,7 +27,7 @@ const Add = () => {
     category: "Men",
     subCategory: "Tshirt",
     sizes: [],
-    bestSeller: true,
+    bestSeller: false,
     price: "",
   });
 
@@ -144,7 +144,7 @@ const Add = () => {
   };
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col md:w-[55%]">
         <form onSubmit={handleSubmit}>
           {/* upload images */}
           <div className="py-3">
@@ -160,7 +160,7 @@ const Add = () => {
             <div onClick={handleClick}>
               <GrGallery className="mb-5 text-7xl border border-gray-300 p-3 cursor-pointer" />
             </div>
-            <div className="flex gap-5">
+            <div className="grid grid-cols-4 gap-5">
               {image.map((img, index) => (
                 <div key={index} className="relative">
                   <img className="w-40 object-cover" src={img} alt="" />
@@ -182,7 +182,7 @@ const Add = () => {
               onChange={handleChange}
               name="name"
               value={input.name}
-              className="border w-full sm:w-[35%] border-gray-200 rounded-md outline-none p-2"
+              className="border w-full border-gray-200 rounded-md outline-none p-2"
             />
           </div>
           <div>
@@ -192,11 +192,11 @@ const Add = () => {
               name="description"
               value={input.description}
               placeholder="Product Description"
-              className="border w-full sm:w-[35%] border-gray-200 rounded-md outline-none p-2 h-40"
+              className="border w-full border-gray-200 rounded-md outline-none p-2 h-40"
             />
           </div>
           {/* dropdown */}
-          <div className="flex gap-5">
+          <div className="flex gap-10">
             <div>
               <h2>Product Category</h2>
               <select
@@ -265,7 +265,7 @@ const Add = () => {
                 checked={input.bestSeller}
                 onChange={handleChange}
                 id="bestSeller"
-                className="cursor-pointer"
+                className="cursor-pointer mr-2"
                 type="checkbox"
               />
               Add to BestSeller

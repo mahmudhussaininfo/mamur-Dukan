@@ -13,6 +13,7 @@ const ReletedProducts = ({ category, id }) => {
       product = product.filter(
         (item) => item._id !== id && item.category === category
       );
+
       setReleted(product.slice(0, 4));
     }
   }, [products]);
