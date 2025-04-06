@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { shopContext } from "../context/Context";
 import Title from "../components/Title";
 import { FaRegTrashAlt } from "react-icons/fa";
-import CartTotal from "../components/cartTotal";
+import CartTotal from "../components/CartTotal";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
